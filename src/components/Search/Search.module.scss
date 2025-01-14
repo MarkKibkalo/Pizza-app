@@ -1,0 +1,25 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon {
+  width: 19px;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.input {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 8px 15px;
+  border-radius: 10px;
+  width: 300px;
+  font-size: 16px;
+
+  &:focus {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
