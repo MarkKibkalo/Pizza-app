@@ -5,16 +5,24 @@ import Sort from '../components/Sort';
 import Categories from '../components/Categories';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import { SearchContext } from '../App';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCategoryId } from '../redux/slices/filterSlices';
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const categoryId = useSelector((state) => state.filter.categoryId);
   const { searchValue } = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [categoryId, setCategoryId] = useState(0);
+  // const [categoryId, setCategoryId] = useState(0);
   const [sortType, setSortType] = useState({
     name: 'популярністю',
     sortProperty: 'rating',
   });
+
+  const onChangeCategory = (id) => {
+    dispatch(setCategoryId(id));
+  };
 
   const list = [
     { name: 'популярністю', sortProperty: 'rating' },
@@ -54,7 +62,7 @@ export default function Home() {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryId} onChangeCategory={setCategoryId} />
+        <Categories value={categoryId} onChangeCategory={onChangeCategory} />
         <Sort
           value={list.findIndex((item) => item.sortProperty === sortType.sortProperty)}
           onChangeSort={(i) => setSortType(list[i])}
