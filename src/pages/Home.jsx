@@ -11,28 +11,21 @@ import { setCategoryId } from '../redux/slices/filterSlices';
 export default function Home() {
   const dispatch = useDispatch();
   const categoryId = useSelector((state) => state.filter.categoryId);
+  const sortType = useSelector((state) => state.filter.sort.sortProperty);
   const { searchValue } = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  // const [categoryId, setCategoryId] = useState(0);
-  const [sortType, setSortType] = useState({
-    name: 'популярністю',
-    sortProperty: 'rating',
-  });
+
+  console.log(sortType);
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
   };
 
-  const list = [
-    { name: 'популярністю', sortProperty: 'rating' },
-    { name: 'ціною', sortProperty: 'price' },
-    { name: 'алфавітом', sortProperty: 'title' },
-  ];
-
   useEffect(() => {
-    const sortBy = sortType.sortProperty.replace('-', '');
-    const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
+    console.log('sortType:', sortType); // Проверяем, что приходит в sortType
+    const sortBy = sortType ? sortType.replace('-', '') : 'rating';
+    const order = sortType && sortType.includes('-') ? 'asc' : 'desc';
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
@@ -63,10 +56,7 @@ export default function Home() {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort
-          value={list.findIndex((item) => item.sortProperty === sortType.sortProperty)}
-          onChangeSort={(i) => setSortType(list[i])}
-        />
+        <Sort />
       </div>
       <h2 className="content__title">Усі піци</h2>
       <div className="content__items">{isLoading ? skeletonItems : pizzaItems}</div>
