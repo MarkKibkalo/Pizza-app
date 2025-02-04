@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
 
 import PizzaBlock from '../components/PizzaBlock';
 import Sort from '../components/Sort';
@@ -10,20 +11,17 @@ import { setCategoryId } from '../redux/slices/filterSlices';
 
 export default function Home() {
   const dispatch = useDispatch();
-  const categoryId = useSelector((state) => state.filter.categoryId);
-  const sortType = useSelector((state) => state.filter.sort.sortProperty);
+  const { categoryId, sort } = useSelector((state) => state.filter);
+  const sortType = sort.sortProperty;
   const { searchValue } = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  console.log(sortType);
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
   };
 
   useEffect(() => {
-    console.log('sortType:', sortType); // Проверяем, что приходит в sortType
     const sortBy = sortType ? sortType.replace('-', '') : 'rating';
     const order = sortType && sortType.includes('-') ? 'asc' : 'desc';
     const category = categoryId > 0 ? `category=${categoryId}` : '';
@@ -32,14 +30,14 @@ export default function Home() {
     async function pizzaList() {
       setIsLoading(true);
       try {
-        const response = await fetch(
+        const { data } = await axios.get(
           `https://67658436410f849996555f31.mockapi.io/Items?${category}&sortBy=${sortBy}&order=${order}${search}`,
         );
-        const data = await response.json();
         setItems(data);
-        setIsLoading(false);
       } catch (error) {
-        console.error('Помилка завантаження даних:', error);
+        console.error('Помилка завантаження піц:', error);
+      } finally {
+        setIsLoading(false);
       }
     }
 
