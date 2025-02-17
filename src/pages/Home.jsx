@@ -33,10 +33,11 @@ export default function Home() {
         const { data } = await axios.get(
           `https://67658436410f849996555f31.mockapi.io/Items?${category}&sortBy=${sortBy}&order=${order}${search}`,
         );
-        console.log(data);
         setItems(data);
       } catch (error) {
         console.error('Помилка завантаження піц:', error);
+        setIsLoading(true);
+        alert('Помилка при отриманні піц');
       } finally {
         setIsLoading(false);
       }
