@@ -17,7 +17,6 @@ export const fetchPizzas = createAsyncThunk(
       dispatch(setItems(data));
     } catch (error) {
       console.error('Помилка при отриманні піцц', error);
-      alert('Помилка при отриманні піцц');
     }
   },
 );
