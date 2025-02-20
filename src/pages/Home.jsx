@@ -1,20 +1,21 @@
 import { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { SearchContext } from '../App';
 
 import PizzaBlock from '../components/PizzaBlock';
 import Sort from '../components/Sort';
 import Categories from '../components/Categories';
 import Skeleton from '../components/PizzaBlock/Skeleton';
-import { SearchContext } from '../App';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { setCategoryId } from '../redux/slices/filterSlices';
+import { fetchPizzas } from '../redux/slices/pizzaThunk';
 
 export default function Home() {
   const dispatch = useDispatch();
+  const items = useSelector((state) => state.pizza.items);
   const { categoryId, sort } = useSelector((state) => state.filter);
   const sortType = sort.sortProperty;
   const { searchValue } = useContext(SearchContext);
-  const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const onChangeCategory = (id) => {
@@ -22,28 +23,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const sortBy = sortType ? sortType.replace('-', '') : 'rating';
-    const order = sortType && sortType.includes('-') ? 'asc' : 'desc';
-    const category = categoryId > 0 ? `category=${categoryId}` : '';
-    const search = searchValue ? `&search=${searchValue}` : '';
+    setIsLoading(true);
+    dispatch(fetchPizzas({ categoryId, sortType, searchValue })).finally(() => {
+      setIsLoading(false);
+    });
 
-    async function pizzaList() {
-      setIsLoading(true);
-      try {
-        const { data } = await axios.get(
-          `https://67658436410f849996555f31.mockapi.io/Items?${category}&sortBy=${sortBy}&order=${order}${search}`,
-        );
-        setItems(data);
-      } catch (error) {
-        console.error('Помилка завантаження піц:', error);
-        setIsLoading(true);
-        alert('Помилка при отриманні піц');
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    pizzaList();
     window.scrollTo(0, 0);
   }, [categoryId, sortType, searchValue]);
 
