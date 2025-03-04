@@ -1,16 +1,26 @@
 @import '../variables';
 
 .categories {
+  overflow-x: auto; // Добавляем горизонтальный скролл
+  white-space: nowrap; // Запрещаем перенос строк
+  padding-bottom: 10px; // Чтобы скроллбар не перекрывал элементы
+
+  &__list {
+    display: flex;
+    gap: 10px; // Отступы между категориями
+  }
+
   ul {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; // Убираем перенос элементов на новую строку
+    overflow-x: auto; // Включаем горизонтальный скролл
+    scrollbar-width: thin; // Для Firefox
+    scrollbar-color: #ccc #f1f1f1;
 
     li {
       background-color: #f9f9f9;
       padding: 13px 30px;
       border-radius: 30px;
-      margin-right: 10px;
-      font-weight: bold;
       cursor: pointer;
       transition: background-color 0.1s ease-in-out;
       @include noselect();
@@ -27,6 +37,51 @@
         background-color: #282828;
         color: #fff;
       }
+    }
+  }
+
+  &::-webkit-scrollbar {
+    height: 6px; // Делаем скроллбар тоньше
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  @media (max-width: 1060px) {
+    ul {
+      gap: 5px;
+    }
+    li {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 730px) {
+    .categories {
+      width: calc(100vw - 40px);
+    }
+
+    ul {
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      padding-bottom: 5px; // Добавляем отступ для скроллбара
+      scrollbar-width: none; // Прячем скроллбар в Firefox
+    }
+
+    ul::-webkit-scrollbar {
+      display: none; // Прячем скроллбар в WebKit (Chrome, Safari)
+    }
+
+    li {
+      padding: 8px 15px;
+      font-size: 12px;
     }
   }
 }

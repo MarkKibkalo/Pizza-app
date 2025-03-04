@@ -1,11 +1,11 @@
 import React from 'react';
 
 export default function Categories({ value, onChangeCategory }) {
-  const categories = ['Усі', "М'ясні", 'Вегетаріанська', 'Гриль', 'Гострі', 'Закриті'];
+  const categories = ['All', 'Meat', 'Vegetarian', 'Grill', 'Spicy'];
 
   return (
     <div className="categories">
-      <ul>
+      <ul className="categories__list">
         {categories.map((categoryName, i) => (
           <li key={i} onClick={() => onChangeCategory(i)} className={value === i ? 'active' : ''}>
             {categoryName}

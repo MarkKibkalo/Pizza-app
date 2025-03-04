@@ -1,40 +1,85 @@
 @import '../variables';
+@import '../fonts';
 
 .header {
-  border-bottom: 1px solid $gray-line;
-  padding: 40px 0;
+  h1 {
+    font-family: 'Nunito';
+    font-weight: 700;
+    color: $orange;
+    font-size: 10vw;
+    letter-spacing: 1%;
+    text-transform: uppercase;
+  }
 
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    @media (max-width: 650px) {
-      display: block;
-    }
   }
 
   &__cart {
     display: flex;
     justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__search {
+    flex-grow: 1;
+    display: flex;
   }
 
   &__logo {
     display: flex;
+    flex-shrink: 0;
 
     img {
       margin-right: 15px;
-    }
-
-    h1 {
-      color: #181818;
-      font-size: 24px;
-      letter-spacing: 1%;
-      text-transform: uppercase;
-      font-weight: 800;
     }
 
     p {
       color: #7b7b7b;
     }
   }
+  @media (max-width: 700px) {
+    .container {
+      justify-content: center;
+    }
+
+    &__logo {
+      display: none;
+    }
+  }
+}
+
+.title__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-basis: 30%;
+  background-color: #b8b8ff;
+  padding: 20px 0;
+  margin-bottom: 35px;
+  height: 100vh;
+  justify-content: space-between;
+  transition: gap 1.2s cubic-bezier(0.4, 0, 0.2, 1), height 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  p {
+    text-align: center;
+    font-size: 2vw;
+    font-weight: 500;
+    color: $orange;
+  }
+}
+
+.full-height {
+  gap: 30vw;
+  height: 100vh;
+  padding-top: 50px; // Немного больше отступ сверху в начале
+}
+
+.shrunk {
+  gap: 20px;
+  height: 30vw;
+  padding-top: 20px;
 }

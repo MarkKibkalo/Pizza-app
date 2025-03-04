@@ -14,7 +14,7 @@ html {
 body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  color: #232323;
+  color: #1e1e1e;
 }
 
 a,
@@ -26,11 +26,12 @@ h2,
 h3,
 h4,
 h5 {
-  color: #232323;
+  color: #1e1e1e;
 }
 
 h1 {
   font-size: 48px;
+  color: #1e1e1e;
 }
 
 h2 {
@@ -344,7 +345,7 @@ a {
 }
 
 body {
-  font-family: 'Nunito', serif;
+  font-family: 'Antarctica', serif;
   font-optical-sizing: auto;
   font-style: normal;
 }

@@ -67,7 +67,7 @@
       }
     }
 
-    &:hover {
+    &:hover:not(.active) {
       background-color: $orange;
 
       &,
@@ -101,7 +101,6 @@
     }
 
     span {
-      font-weight: 600;
       font-size: 16px;
     }
 
@@ -117,7 +116,6 @@
       border-radius: 30px;
       background-color: $orange;
       color: #fff;
-      font-weight: 600;
       width: 22px;
       height: 22px;
       font-style: normal;
@@ -134,9 +132,10 @@
     align-items: center;
     line-height: 23px;
     padding: 12px 25px;
-    @media (max-width: 650px) {
+    @media (max-width: 1100px) {
       position: fixed;
       bottom: 15px;
+      justify-self: anchor-center;
     }
 
     svg {
@@ -145,7 +144,6 @@
     }
 
     span {
-      font-weight: 600;
       font-size: 16px;
     }
   }

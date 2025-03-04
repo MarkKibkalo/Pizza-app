@@ -27,9 +27,7 @@ export default function Home() {
     dispatch(fetchPizzas({ categoryId, sortType, searchValue })).finally(() => {
       setIsLoading(false);
     });
-
-    window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue]);
+  }, [dispatch, categoryId, sortType, searchValue]);
 
   const skeletonItems = [...new Array(8)].map((_, i) => <Skeleton key={i} />);
   const pizzaItems = items
@@ -37,12 +35,11 @@ export default function Home() {
     .map((obj) => <PizzaBlock key={obj.id} {...obj} />);
 
   return (
-    <div className="container">
+    <div className="wrapper">
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
         <Sort />
       </div>
-      <h2 className="content__title">Усі піци</h2>
       <div className="content__items">{isLoading ? skeletonItems : pizzaItems}</div>
     </div>
   );

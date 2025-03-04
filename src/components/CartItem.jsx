@@ -26,7 +26,7 @@ export default function CartItem({ count, title, price, imageUrl, size, type, id
       <div className="cart__item-info">
         <h3>{title}</h3>
         <p>
-          {type}, {size} см.
+          {type}, {size}″.
         </p>
       </div>
       <div className="cart__item-count">
@@ -71,7 +71,7 @@ export default function CartItem({ count, title, price, imageUrl, size, type, id
         </div>
       </div>
       <div className="cart__item-price">
-        <b>{price * (count || 1)} грн</b>
+        <b>{price * (count || 1)}$</b>
       </div>
       <div className="cart__item-remove">
         <div onClick={onClickRemove} className="button button--outline button--circle">

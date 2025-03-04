@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 80%;
 }
 
 .icon {
@@ -13,11 +14,14 @@
 }
 
 .input {
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0);
   padding: 8px 15px;
-  border-radius: 10px;
-  width: 300px;
+  border-radius: 120px;
+  width: 100%;
   font-size: 16px;
+  text-align: center;
+  background-color: #f3f3f3;
+  height: 50px;
 
   &:focus {
     border: 1px solid rgba(0, 0, 0, 0.2);

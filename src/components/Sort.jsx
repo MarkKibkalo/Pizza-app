@@ -9,9 +9,9 @@ export default function Sort() {
 
   const [open, setOpen] = useState(false);
   const list = [
-    { name: 'популярністю', sortProperty: 'rating' },
-    { name: 'ціною', sortProperty: 'price' },
-    { name: 'алфавітом', sortProperty: 'title' },
+    { name: 'popular', sortProperty: 'rating' },
+    { name: 'price', sortProperty: 'price' },
+    { name: 'title', sortProperty: 'title' },
   ];
 
   const onClickSort = (obj) => {
@@ -48,7 +48,7 @@ export default function Sort() {
             fill="#2C2C2C"
           />
         </svg>
-        <b>Сортування за:</b>
+        <b>Sort by:</b>
         <span>{sort.name}</span>
       </div>
       {open && (
